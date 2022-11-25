@@ -22901,18 +22901,13 @@
   var import_react = __toESM(require_react());
   var import_client = __toESM(require_client());
   var colorSet = ["red", "gold", "green", "blue", "purple", "gray", "black"];
-  var typeSet = ["\u2660", "\u2665", "\u2666", "\u2663", "\u265A", "\u265B", "\u263B"];
+  var typeSet = ["\u265A", "\u265B", "\u265C", "\u265D", "\u265E", "\u265F\uFE0E", "\u263B"];
   var randMultInt = (mult) => Math.random() * mult | 0;
   var generateGame = () => {
     const slots = Array.from(Array(100), (_, i) => ({ index: i, row: Math.floor(i / 10), col: i % 10 }));
-    const combinations = Array.from(Array(49), (_, i) => ({
-      type: typeSet[Math.floor(i / 7)],
-      color: colorSet[i % 7]
-    }));
-    combinations.push({ type: "\u2600", color: colorSet[randMultInt(7)] });
     const cells = [];
     for (let i = 0; i < 50; i += 1) {
-      const type = i === 49 ? "\u2600" : typeSet[Math.floor(i / 7)];
+      const type = i === 49 ? "\u2619" : typeSet[Math.floor(i / 7)];
       const color = i === 49 ? colorSet[randMultInt(7)] : colorSet[i % 7];
       const [pair1Slot] = slots.splice(randMultInt(slots.length), 1);
       const [pair2Slot] = slots.splice(randMultInt(slots.length), 1);
