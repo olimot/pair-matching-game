@@ -24,6 +24,10 @@
   justify-content: center;
 }
 
+.play {
+  font-size: 24px;
+}
+
 .time-gauge-bar {
   width: 600px;
   height: 48px;

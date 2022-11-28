@@ -22941,12 +22941,14 @@
         cancelAnimationFrame(timerId);
       };
     }, [targetTime, gameState]);
+    const score = Object.keys(solved).length;
     return /* @__PURE__ */ import_react.default.createElement("div", null, /* @__PURE__ */ import_react.default.createElement("h1", null, "\uC9DD \uB9DE\uCD94\uAE30 \uAC8C\uC784!"), /* @__PURE__ */ import_react.default.createElement("div", {
       className: "i-enjoy"
-    }, "\uC990\uAC81\uB2E4"), /* @__PURE__ */ import_react.default.createElement("h2", null, "Score: ", Object.keys(solved).length, "\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0Time Left:", " ", timeLeft.toFixed(3), "ms"), !gameState || timeLeft <= 0 ? /* @__PURE__ */ import_react.default.createElement("div", {
+    }, "\uC990\uAC81\uB2E4"), /* @__PURE__ */ import_react.default.createElement("h2", null, "Score: ", score, "\xA0\xA0\xA0\xA0\xA0\xA0\xA0\xA0Time Left: ", timeLeft.toFixed(3), "ms"), !gameState || timeLeft <= 0 ? /* @__PURE__ */ import_react.default.createElement("div", {
       className: "game-scene"
     }, /* @__PURE__ */ import_react.default.createElement("button", {
       type: "button",
+      className: "play",
       onClick: () => {
         setTargetTime(3e4);
         setSelected(null);
@@ -22955,7 +22957,16 @@
       }
     }, "PLAY")) : /* @__PURE__ */ import_react.default.createElement("div", {
       className: "game-scene"
-    }, /* @__PURE__ */ import_react.default.createElement("div", {
+    }, score === 100 ? /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("h1", null, "\uD074\uB9AC\uC5B4!"), /* @__PURE__ */ import_react.default.createElement("button", {
+      type: "button",
+      className: "play",
+      onClick: () => {
+        setTargetTime(3e4);
+        setSelected(null);
+        setSolved({});
+        setGameState(generateGame);
+      }
+    }, "\uB2E4\uC2DC\uD558\uAE30")) : /* @__PURE__ */ import_react.default.createElement(import_react.default.Fragment, null, /* @__PURE__ */ import_react.default.createElement("div", {
       className: "time-gauge-bar"
     }, /* @__PURE__ */ import_react.default.createElement("div", {
       className: "time-gauge",
@@ -22970,6 +22981,10 @@
           setSelected(index);
           return;
         }
+        if (selected === index) {
+          setSelected(null);
+          return;
+        }
         if (gameState.cells[selected].isFake && isFake || gameState.cells[selected].type === type && gameState.cells[selected].color === color) {
           setSolved((prev) => ({ ...prev, [index]: true, [selected]: true }));
           setTargetTime((t) => t + 1e3);
@@ -22978,7 +22993,7 @@
       }
     }, /* @__PURE__ */ import_react.default.createElement("span", {
       style: { color }
-    }, type))))));
+    }, type)))))));
   };
   var rootElement = document.getElementById("root");
   if (rootElement) {
